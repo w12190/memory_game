@@ -1,14 +1,69 @@
-<!DOCTYPE html>
 <html>
+    <!DOCTYPE html>
     <head>
         <meta charset="UTF-8">
         <title>title</title>
     </head>
     <body>
-  
-
+        <img id="block1" height="348" width="250" src="https://i.imgur.com/P7qYTcI.png" alt="cardback">
+        <img id="block2" height="348" width="250" src="https://i.imgur.com/P7qYTcI.png" alt="cardback"><br>
+        <img id="block3" height="348" width="250" src="https://i.imgur.com/P7qYTcI.png" alt="cardback">
+        <img id="block4" height="348" width="250" src="https://i.imgur.com/P7qYTcI.png" alt="cardback"><br>
+        
     </body>
     <script>
-        
+        let cardback = "https://i.imgur.com/P7qYTcI.png"
+        let numCards = 4
+        let allBlocks = []
+        let isGameOver = false
+        let numMoves = 0
+
+        let isFirstFlip = true
+        let firstFlipIndex = Infinity
+
+        let cards = [
+            "https://i.pinimg.com/originals/bc/d8/1d/bcd81d69eb87744fb9a639f152b5dc7d.jpg",
+            "https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/baby-bunny-and-baby-duck-gail-shumway.jpg",
+            "https://i.pinimg.com/originals/bc/d8/1d/bcd81d69eb87744fb9a639f152b5dc7d.jpg",
+            "https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/baby-bunny-and-baby-duck-gail-shumway.jpg"
+        ].sort(function() {return (0.5 - Math.random())})
+
+        for (let i = 0; i < numCards; i++){
+            allBlocks.push(document.getElementById("block"+(i+1)))
+            allBlocks[i].addEventListener("click", ()=>{
+                if (allBlocks[i].src !== cardback){
+                    alert("Please click a facedown card")
+                }
+                else{
+                    numMoves++
+                    allBlocks[i].src = cards[i]
+                    if(isFirstFlip){
+                        firstFlipIndex = i
+                        isFirstFlip = !isFirstFlip
+                    }
+                    else{
+                        if(allBlocks[i].src !== cards[firstFlipIndex]){
+                            window.setTimeout(function(){
+                                allBlocks[i].src = cardback
+                                allBlocks[firstFlipIndex].src = cardback
+                            }, 500)
+                        }
+                        else{
+                            isGameOver = true
+                            for(let j = 0; j < numCards; j++){
+                                if (allBlocks[j].src === cardback){
+                                    isGameOver = false
+                                }
+                            }
+                            if (isGameOver){
+                                numMoves = 0
+                                //TODO: implement game reset feature if desired
+                            }
+                        }
+                        isFirstFlip = true
+                    }
+                }
+            })
+        }
     </script>
 </html>
