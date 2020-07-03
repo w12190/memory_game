@@ -2,63 +2,194 @@
     <!DOCTYPE html>
     <head>
         <meta charset="UTF-8">
-        <title>title</title>
+        <title>Safari∂ Matching Game</title>
+        <style>
+            img {
+                padding-bottom: 5px;
+            }
+            .fade-in {
+                animation: fadeIn ease 2.5s;
+            }
+
+            .fade-out {
+                animation: fadeOut ease-out 1s;
+            }
+
+            .vibrate {
+                animation: vibrate 0.15s;
+                animation-iteration-count: 1;
+            }
+
+            .longVibrate{
+                animation: vibrate 0.15s;
+                animation-iteration-count: 3;   
+            }
+
+            @keyframes fadeIn {
+                0% {
+                    opacity:0;
+                }
+                100% {
+                    opacity:1;
+                }
+            }
+
+            @keyframes fadeOut {
+                0% {
+                    opacity:1;
+                }
+                100% {
+                    opacity:0;
+                }
+            }
+
+            @keyframes vibrate {
+                0% { transform: translate(1px, 1px) rotate(0deg); }
+                10% { transform: translate(-1px, -2px) rotate(-0.5deg); }
+                20% { transform: translate(-3px, 0px) rotate(0.5deg); }
+                30% { transform: translate(3px, 2px) rotate(0deg); }
+                40% { transform: translate(1px, -1px) rotate(0.5deg); }
+                50% { transform: translate(-1px, 2px) rotate(-0.5deg); }
+                60% { transform: translate(-3px, 1px) rotate(0deg); }
+                70% { transform: translate(3px, 1px) rotate(-0.5deg); }
+                80% { transform: translate(-1px, -1px) rotate(0.5deg); }
+                90% { transform: translate(1px, 2px) rotate(0deg); }
+                100% { transform: translate(1px, -2px) rotate(-0.5deg); }
+            }
+
+            #container {
+                display: inline-block;
+                padding-left: 100px;
+            }
+
+            #restart {
+                animation: fadeIn ease-in 2.3s;
+                padding-left: 0px;
+            }
+
+            #score {
+                display: inline-block;     
+                color: lightgray;
+                font-size: 75;
+                width: 150px;
+                font-family: monospace;
+                vertical-align: 105px;
+                margin-left: -110px;
+            }
+
+
+        </style>
     </head>
     <body>
-        <img id="block1" height="348" width="250" src="https://i.imgur.com/P7qYTcI.png" alt="cardback">
-        <img id="block2" height="348" width="250" src="https://i.imgur.com/P7qYTcI.png" alt="cardback"><br>
-        <img id="block3" height="348" width="250" src="https://i.imgur.com/P7qYTcI.png" alt="cardback">
-        <img id="block4" height="348" width="250" src="https://i.imgur.com/P7qYTcI.png" alt="cardback"><br>
+        <br>
+        <div class="fade-in" style="text-align: center">
+            <div id="container">
+                <img id="block1" height="170" width="180" src="images/questionmark.svg" alt="cardback here">
+                <img id="block2" height="170" width="180" src="images/questionmark.svg" alt="cardback here">
+                <img id="block3" height="170" width="180" src="images/questionmark.svg" alt="cardback here">
+                <img id="block4" height="170" width="180" src="images/questionmark.svg" alt="cardback here"><br>
+                <img id="block5" height="170" width="180" src="images/questionmark.svg" alt="cardback here">
+                <img id="block6" height="170" width="180" src="images/questionmark.svg" alt="cardback here">
+                <img id="block7" height="170" width="180" src="images/questionmark.svg" alt="cardback here">
+                <img id="block8" height="170" width="180" src="images/questionmark.svg" alt="cardback here"><br>
+                <img id="block9" height="170" width="180" src="images/questionmark.svg" alt="cardback here">
+                <img id="block10" height="170" width="180" src="images/questionmark.svg" alt="cardback here">
+                <img id="block11" height="170" width="180" src="images/questionmark.svg" alt="cardback here">
+                <img id="block12" height="170" width="180" src="images/questionmark.svg" alt="cardback here"><br>
+                <img id="block13" height="170" width="180" src="images/questionmark.svg" alt="cardback here">
+                <img id="block14" height="170" width="180" src="images/questionmark.svg" alt="cardback here">
+                <img id="block15" height="170" width="180" src="images/questionmark.svg" alt="cardback here">
+                <img id="block16" height="170" width="180" src="images/questionmark.svg" alt="cardback here"><br>
+            </div><img id="restart" height="65" width="68" src="images/restart.png" alt="restart button"><p id="score"></p>
+        </div> 
         
     </body>
     <script>
-        let cardback = "https://i.imgur.com/P7qYTcI.png"
-        let numCards = 4
+        const cardback = "https://github.com/w12190/memory_game/images/questionmark.svg"
+        const numCards = 16
+
         let allBlocks = []
         let isGameOver = false
-        let numMoves = 0
-
         let isFirstFlip = true
         let firstFlipIndex = Infinity
+        let numMoves = 0
+        let backupFirstFlipIndex
+        
 
-        let cards = [
-            "https://i.pinimg.com/originals/bc/d8/1d/bcd81d69eb87744fb9a639f152b5dc7d.jpg",
-            "https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/baby-bunny-and-baby-duck-gail-shumway.jpg",
-            "https://i.pinimg.com/originals/bc/d8/1d/bcd81d69eb87744fb9a639f152b5dc7d.jpg",
-            "https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/baby-bunny-and-baby-duck-gail-shumway.jpg"
-        ].sort(function() {return (0.5 - Math.random())})
+        //Attribution: Icons made by user "Pixel perfect" from www.flaticon.com
+        const imagePool = [
+            "images/flamingo.svg",
+            "images/mouse.svg",
+            "images/goose.svg",
+            "images/bird.svg",
+            "images/turtle.svg",
+            "images/pig.svg",
+            "images/koala.svg",
+            "images/nemo.svg",
+            "images/rabbit.svg",
+            "images/chameleon.svg",
+            "images/cow.svg",
+            "images/monkey.svg",
+            "images/chicken.svg"
+        ]
 
+        //Generate: 'random' card pool
+        let randomPool = imagePool.sort(function() {return (0.5 - Math.random())}).slice(0, numCards/2)
+        randomPool.push(...randomPool)
+        let cards = randomPool.sort(function() {return (0.5 - Math.random())})
+        
+        //Construct: restart button
+        document.getElementById("restart").addEventListener("click", () => {
+            document.getElementsByTagName("html")[0].classList.toggle("fade-out")
+            window.setTimeout(()=>{
+               location.reload()
+            }, 900)
+        })
+
+        //Construct: game turn
+        
+        //alert(document.getElementById("score").innerHTML)
         for (let i = 0; i < numCards; i++){
             allBlocks.push(document.getElementById("block"+(i+1)))
-            allBlocks[i].addEventListener("click", ()=>{
-                if (allBlocks[i].src !== cardback){
-                    alert("Please click a facedown card")
-                }
-                else{
-                    numMoves++
+            allBlocks[i].addEventListener("click", () => {
+                if ((!isFirstFlip || firstFlipIndex === Infinity) && allBlocks[i].src === cardback){
                     allBlocks[i].src = cards[i]
+                    //First flip
                     if(isFirstFlip){
                         firstFlipIndex = i
                         isFirstFlip = !isFirstFlip
                     }
+                    //Second flip
                     else{
-                        if(allBlocks[i].src !== cards[firstFlipIndex]){
-                            window.setTimeout(function(){
+                        document.getElementById("score").innerHTML = ++numMoves
+                        if(allBlocks[i].src !== "https://github.com/w12190/memory_game/" + cards[firstFlipIndex]){
+                            window.setTimeout(function(){    
                                 allBlocks[i].src = cardback
                                 allBlocks[firstFlipIndex].src = cardback
-                            }, 500)
+                                firstFlipIndex = Infinity
+                            }, 650)
                         }
                         else{
                             isGameOver = true
                             for(let j = 0; j < numCards; j++){
-                                if (allBlocks[j].src === cardback){
-                                    isGameOver = false
-                                }
+                                isGameOver = allBlocks[j].src === cardback ? false : isGameOver
                             }
                             if (isGameOver){
-                                numMoves = 0
-                                //TODO: implement game reset feature if desired
+                                for (let elem of document.getElementsByTagName("img")){
+                                    elem.classList.toggle("longVibrate")
+                                }
                             }
+                            else{
+                                allBlocks[i].classList.toggle("vibrate")
+                                allBlocks[firstFlipIndex].classList.toggle("vibrate")
+                                backupFirstFlipIndex = firstFlipIndex
+
+                                window.setTimeout(function (){
+                                    allBlocks[i].classList.toggle("vibrate")
+                                    allBlocks[backupFirstFlipIndex].classList.toggle("vibrate")
+                                }, 150)  
+                            }
+                            firstFlipIndex = Infinity
                         }
                         isFirstFlip = true
                     }
