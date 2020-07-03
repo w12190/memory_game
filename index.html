@@ -2,7 +2,7 @@
     <!DOCTYPE html>
     <head>
         <meta charset="UTF-8">
-        <title>Safari∂ Matching Game</title>
+        <title>Safari Matching Game</title>
         <style>
             img {
                 padding-bottom: 5px;
@@ -105,7 +105,7 @@
         
     </body>
     <script>
-        const cardback = "images/questionmark.svg"
+        const cardback = "https://w12190.github.io/memory_game/images/questionmark.svg"
         const numCards = 16
 
         let allBlocks = []
@@ -118,19 +118,19 @@
 
         //Attribution: Icons made by user "Pixel perfect" from www.flaticon.com
         const imagePool = [
-            "images/flamingo.svg",
-            "images/mouse.svg",
-            "images/goose.svg",
-            "images/bird.svg",
-            "images/turtle.svg",
-            "images/pig.svg",
-            "images/koala.svg",
-            "images/nemo.svg",
-            "images/rabbit.svg",
-            "images/chameleon.svg",
-            "images/cow.svg",
-            "images/monkey.svg",
-            "images/chicken.svg"
+            "https://w12190.github.io/memory_game/images/flamingo.svg",
+            "https://w12190.github.io/memory_game/images/mouse.svg",
+            "https://w12190.github.io/memory_game/images/goose.svg",
+            "https://w12190.github.io/memory_game/images/bird.svg",
+            "https://w12190.github.io/memory_game/images/turtle.svg",
+            "https://w12190.github.io/memory_game/images/pig.svg",
+            "https://w12190.github.io/memory_game/images/koala.svg",
+            "https://w12190.github.io/memory_game/images/nemo.svg",
+            "https://w12190.github.io/memory_game/images/rabbit.svg",
+            "https://w12190.github.io/memory_game/images/chameleon.svg",
+            "https://w12190.github.io/memory_game/images/cow.svg",
+            "https://w12190.github.io/memory_game/images/monkey.svg",
+            "https://w12190.github.io/memory_game/images/chicken.svg"
         ]
 
         //Generate: 'random' card pool
@@ -150,7 +150,7 @@
         for (let i = 0; i < numCards; i++){
             allBlocks.push(document.getElementById("block"+(i+1)))
             allBlocks[i].addEventListener("click", () => {
-                if ((!isFirstFlip || firstFlipIndex === Infinity) && allBlocks[i].src === ("https://w12190.github.io/memory_game/" + cardback)){
+                if ((!isFirstFlip || firstFlipIndex === Infinity) && allBlocks[i].src === cardback){ 
                     allBlocks[i].src = cards[i]
                     //First flip
                     if(isFirstFlip){
@@ -161,7 +161,7 @@
                     else{
                         document.getElementById("score").innerHTML = ++numMoves
                         if(allBlocks[i].src !== cards[firstFlipIndex]){
-                            window.setTimeout(function(){    
+                            window.setTimeout(function(){  
                                 allBlocks[i].src = cardback
                                 allBlocks[firstFlipIndex].src = cardback
                                 firstFlipIndex = Infinity
