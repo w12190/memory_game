@@ -105,7 +105,7 @@
         
     </body>
     <script>
-        const cardback = "https://github.com/w12190/memory_game/images/questionmark.svg"
+        const cardback = "images/questionmark.svg"
         const numCards = 16
 
         let allBlocks = []
@@ -118,18 +118,18 @@
 
         //Attribution: Icons made by user "Pixel perfect" from www.flaticon.com
         const imagePool = [
-            "images/flamingo.svg",
-            "images/mouse.svg",
-            "images/goose.svg",
-            "images/bird.svg",
-            "images/turtle.svg",
-            "images/pig.svg",
-            "images/koala.svg",
-            "images/nemo.svg",
-            "images/rabbit.svg",
-            "images/chameleon.svg",
-            "images/cow.svg",
-            "images/monkey.svg",
+            "/images/flamingo.svg",
+            "/images/mouse.svg",
+            "/images/goose.svg",
+            "/images/bird.svg",
+            "/images/turtle.svg",
+            "/images/pig.svg",
+            "/images/koala.svg",
+            "/images/nemo.svg",
+            "/images/rabbit.svg",
+            "/images/chameleon.svg",
+            "/images/cow.svg",
+            "/images/monkey.svg",
             "images/chicken.svg"
         ]
 
@@ -147,8 +147,6 @@
         })
 
         //Construct: game turn
-        
-        //alert(document.getElementById("score").innerHTML)
         for (let i = 0; i < numCards; i++){
             allBlocks.push(document.getElementById("block"+(i+1)))
             allBlocks[i].addEventListener("click", () => {
@@ -162,7 +160,7 @@
                     //Second flip
                     else{
                         document.getElementById("score").innerHTML = ++numMoves
-                        if(allBlocks[i].src !== "https://github.com/w12190/memory_game/" + cards[firstFlipIndex]){
+                        if(allBlocks[i].src !== cards[firstFlipIndex]){
                             window.setTimeout(function(){    
                                 allBlocks[i].src = cardback
                                 allBlocks[firstFlipIndex].src = cardback
