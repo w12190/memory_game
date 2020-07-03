@@ -150,7 +150,7 @@
         for (let i = 0; i < numCards; i++){
             allBlocks.push(document.getElementById("block"+(i+1)))
             allBlocks[i].addEventListener("click", () => {
-                if ((!isFirstFlip || firstFlipIndex === Infinity) && allBlocks[i].src === cardback){
+                if ((!isFirstFlip || firstFlipIndex === Infinity) && allBlocks[i].src === ("https://w12190.github.io/memory_game/" + cardback)){
                     allBlocks[i].src = cards[i]
                     //First flip
                     if(isFirstFlip){
